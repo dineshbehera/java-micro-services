@@ -7,7 +7,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class ApiGatewayApplication {
 	public static void main(String[] args) {
-		System.out.println("Request received !");
+		System.out.println("Request received !"+ args.toString());
 		SpringApplication.run(ApiGatewayApplication.class, args);
 	}
 
