@@ -1,0 +1,26 @@
+server:
+  port: 8090  
+spring:
+  application:
+    name: api-gateway
+  main:
+    web-application-type: reactive
+  cloud:
+    gateway:
+      enabled: true
+      routes:
+      - id: customer
+        uri: http://localhost:8081/
+        predicates:
+          - Path=/api/v1/customer/**
+      - id: product
+        uri: http://localhost:8082/
+        predicates:
+          - Path=/api/v1/product/**
+      - id: admin
+        uri: http://localhost:8083/
+        predicates:
+          - Path=/api/v1/admin/**
+    config:
+      enabled: false
+          

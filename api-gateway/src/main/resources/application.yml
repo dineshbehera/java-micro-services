@@ -17,7 +17,7 @@ spring:
         predicates:
           - Path=/api/v1/customer/**
       - id: product
-        uri: http://localhost:8082/
+        uri: lb://CUSTOMER
         predicates:
           - Path=/api/v1/product/**
       - id: admin
@@ -29,6 +29,7 @@ spring:
 eureka:
   instance:
     hostname: localhost
-  client:
-    service-url:
-      defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka/
+#  client:
+#    service-url:
+#      defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka/
+            

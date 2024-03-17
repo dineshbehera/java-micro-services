@@ -1,20 +1,35 @@
 server:
-  port: 8083  
+  port: 8090  
 spring:
   application:
-    name: API-GATEWAY
+    name: api-gateway
   main:
     web-application-type: reactive
   cloud:
     gateway:
       enabled: true
+      discovery:
+        locator:
+          enabled: true
       routes:
       - id: customer
+        uri: http://localhost:8081/
+        predicates:
+          - Path=/api/v1/customer/**
+      - id: product
         uri: lb://CUSTOMER
         predicates:
-        - Path=/api/v1/customer/**
-      - id: product
-        uri: lb://PRODUCT
+          - Path=/api/v1/product/**
+      - id: admin
+        uri: lb://ADMIN
         predicates:
-        - Path=/api/v1/product/**
-          
+          - Path=/api/v1/admin/**
+    config:
+      enabled: false
+eureka:
+  instance:
+    hostname: localhost
+#  client:
+#    service-url:
+#      defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka/
+            
